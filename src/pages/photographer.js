@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/layout';
+import Lightbox from '../components/Lightbox'; // Assurez-vous de créer ce composant
+import Formulary from '../components/Formulary';
 
 function Photographer() {
     const { id } = useParams();
@@ -8,6 +10,11 @@ function Photographer() {
     const [media, setMedia] = useState([]);
     const [sortOption, setSortOption] = useState('likes');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [isFormularyOpen, setIsFormularyOpen] = useState(false);
+    const [selectedMediaIndex, setSelectedMediaIndex] = useState(null);
+
+    const totalLikes = media.reduce((sum, item) => sum + item.likes, 0);
 
     useEffect(() => {
         async function fetchPhotographer() {
@@ -58,6 +65,32 @@ function Photographer() {
         { value: 'title', label: 'Titre' }
     ];
 
+    const openLightbox = (index) => {
+        setSelectedMediaIndex(index);
+        setIsLightboxOpen(true);
+    };
+
+    const closeLightbox = () => {
+        setIsLightboxOpen(false);
+        setSelectedMediaIndex(null);
+    };
+
+    const openFormulary = () => {
+        setIsFormularyOpen(true);
+    };
+
+    const closeFormulary = () => {
+        setIsFormularyOpen(false);
+    };
+
+    const showNextMedia = () => {
+        setSelectedMediaIndex((prevIndex) => (prevIndex + 1) % sortedMedia.length);
+    };
+
+    const showPrevMedia = () => {
+        setSelectedMediaIndex((prevIndex) => (prevIndex - 1 + sortedMedia.length) % sortedMedia.length);
+    };
+
     return (
         <div>
             <Layout />
@@ -69,7 +102,7 @@ function Photographer() {
                         <p>{tagline}</p>
                     </div>
 
-                    <button className='contact_button'>Contactez-moi</button>
+                    <button className='contact_button' onClick={openFormulary}>Contactez-moi</button>
 
                     <img src={picture} alt={name} />
                 </div>
@@ -91,8 +124,8 @@ function Photographer() {
                 </div>
 
                 <div className='media-section'>
-                    {sortedMedia.map((item) => (
-                        <div key={item.id} className='media-item'>
+                    {sortedMedia.map((item, index) => (
+                        <div key={item.id} className='media-item' onClick={() => openLightbox(index)}>
                             <img src={`../assets/images/${item.image}`} alt={item.title} />
                             <div className='media-text'>
                                 <h2>{item.title}</h2>
@@ -104,6 +137,31 @@ function Photographer() {
                         </div>
                     ))}
                 </div>
+
+                <div className='about-photographer'>
+                    <div className='text'>
+                    <p>{totalLikes}</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" stroke-width="0" fill="currentColor" />
+                    </svg>
+                    </div>
+
+                    <p>{photographer.price}€/jour</p>
+                </div>
+
+                {isLightboxOpen && (
+                    <Lightbox
+                        media={sortedMedia[selectedMediaIndex]}
+                        onClose={closeLightbox}
+                        onPrev={showPrevMedia}
+                        onNext={showNextMedia}
+                    />
+                )}
+
+                {isFormularyOpen && (
+                    <Formulary onClose={closeFormulary} photographer={photographer} />
+                )}
             </main>
         </div>
     );
