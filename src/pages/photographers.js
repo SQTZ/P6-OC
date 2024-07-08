@@ -42,11 +42,11 @@ function Photographers() {
     <div>
         <Layout/>
       <main>
-        <div className="photographer_section">
+        <section className="photographer_section">
           {photographers.map((photographer, index) => (
             <PhotographerCard key={index} photographer={photographer} />
           ))}
-        </div>
+        </section>
       </main>
     </div>
   );
