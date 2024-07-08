@@ -40,14 +40,19 @@ function Photographers() {
 
   return (
     <div>
+
         <Layout/>
+
       <main>
+
         <section className="photographer_section">
           {photographers.map((photographer, index) => (
             <PhotographerCard key={index} photographer={photographer} />
           ))}
         </section>
+
       </main>
+      
     </div>
   );
 }

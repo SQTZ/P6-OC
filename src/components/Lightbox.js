@@ -36,38 +36,62 @@ const Lightbox = ({ media, onClose, onPrev, onNext }) => {
 
     return (
         <main className="lightbox-modal">
+
             <div className='lightbox-close'>
+
                 <svg xmlns="http://www.w3.org/2000/svg" onClick={handleClose} className="icon icon-tabler icon-tabler-x" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#901C1C" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M18 6l-12 12" />
                     <path d="M6 6l12 12" />
                 </svg>
+
             </div>
+
             <div className="lightbox-content">
+
                 <div>
+
                     <svg xmlns="http://www.w3.org/2000/svg" onClick={handlePrev} className="icon icon-tabler icon-tabler-chevron-left" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M15 6l-6 6l6 6" />
-                    </svg></div>
+                    </svg>
+
+                    </div>
+
                 <div>
+
                     {media.image ? (
+
                         <img src={`../assets/images/${media.image}`} alt={media.title} />
+
                     ) : (
+
                         <video controls>
                             <source src={`../assets/videos/${media.video}`} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
+
                     )}
+
                     <div className="lightbox-caption">
+
                         <h2>{media.title}</h2>
+
                     </div>
+
                 </div>
+
                 <div>
+
                     <svg xmlns="http://www.w3.org/2000/svg" onClick={handleNext} className="icon icon-tabler icon-tabler-chevron-right" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M9 6l6 6l-6 6" />
-                    </svg></div>
+                    </svg>
+                    
+                    </div>
+                    
             </div>
+
         </main>
     );
 };

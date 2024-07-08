@@ -105,72 +105,121 @@ function Photographer() {
 
     return (
         <div>
+
             <Layout />
+
             <main>
+
                 <section className='photograph-header'>
+
                     <div>
+
                         <h1>{name}</h1>
+
                         <h3>{city}, {country}</h3>
+
                         <p>{tagline}</p>
+
                     </div>
 
                     <button className='contact_button' onClick={openFormulary}>Contactez-moi</button>
 
                     <img src={picture} alt={name} />
+
                 </section>
 
                 <section className='sort-menu'>
+
                     <label htmlFor="sort">Trier par: </label>
+
                     <div className="custom-dropdown" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                        <div className="custom-dropdown-selected">{sortOptions.find(option => option.value === sortOption).label} <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+                        <div className="custom-dropdown-selected">{sortOptions.find(option => option.value === sortOption).label}
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M6 9l6 6l6 -6" />
-                        </svg></div>
+                        </svg>
+
+                        </div>
+
                         {isDropdownOpen && (
+
                             <div className="custom-dropdown-options">
+
                                 {sortOptions.filter(option => option.value !== sortOption).map(option => (
+
                                     <div key={option.value} onClick={() => handleSortChange(option.value)}>
                                         {option.label}
                                     </div>
+
                                 ))}
+
                             </div>
+
                         )}
+
                     </div>
+
                 </section>
 
+
                 <section className='media-section'>
+
                     {sortedMedia.map((item, index) => (
+
                         <article key={item.id} className='media-item'>
+
                             {item.image ? (
+
                                 <img src={`../assets/images/${item.image}`} alt={item.title} onClick={() => openLightbox(index)} />
+
                             ) : (
+
                                 <video controls onClick={() => openLightbox(index)}>
                                     <source src={`../assets/videos/${item.video}`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
+
                             )}
+
                             <div className='media-text'>
+
                                 <h2>{item.title}</h2>
-                                <p>{item.likes} <svg xmlns="http://www.w3.org/2000/svg" onClick={() => incrementLikes(item.id)} class="icon icon-tabler icon-tabler-heart-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
+
+                                <p>{item.likes}
+
+                                <svg xmlns="http://www.w3.org/2000/svg" onClick={() => incrementLikes(item.id)} class="icon icon-tabler icon-tabler-heart-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" stroke-width="0" fill="currentColor" />
-                                </svg></p>
+                                </svg>
+                                
+                                </p>
+
                             </div>
+
                         </article>
+
                     ))}
+
                 </section>
 
 
                 <section className='about-photographer'>
+
                     <div className='text'>
+
                         <p>{totalLikes}</p>
+
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-filled" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M6.979 3.074a6 6 0 0 1 4.988 1.425l.037 .033l.034 -.03a6 6 0 0 1 4.733 -1.44l.246 .036a6 6 0 0 1 3.364 10.008l-.18 .185l-.048 .041l-7.45 7.379a1 1 0 0 1 -1.313 .082l-.094 -.082l-7.493 -7.422a6 6 0 0 1 3.176 -10.215z" stroke-width="0" fill="currentColor" />
                         </svg>
+
                     </div>
 
                     <p>{photographer.price}€/jour</p>
+
                 </section>
 
                 {isLightboxOpen && (
@@ -185,7 +234,9 @@ function Photographer() {
                 {isFormularyOpen && (
                     <Formulary onClose={closeFormulary} photographer={photographer} />
                 )}
+
             </main>
+            
         </div>
     );
 }
