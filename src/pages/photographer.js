@@ -73,7 +73,6 @@ function Photographer() {
 
     const sortOptions = [
         { value: 'likes', label: 'Popularité' },
-        { value: 'date', label: 'Date' },
         { value: 'title', label: 'Titre' }
     ];
 
@@ -177,7 +176,7 @@ function Photographer() {
                             ) : (
 
                                 <video controls onClick={() => openLightbox(index)}>
-                                    <source src={`../assets/videos/${item.video}`} type="video/mp4" />
+                                    <source src={`../assets/images/${item.video}`} poster={`../assets/images/${item.video.split('.')[0]}.jpg`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
 

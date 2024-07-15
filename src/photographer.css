@@ -165,7 +165,7 @@ form textarea {
 }
 
 
-.media-item img {
+.media-item img, video {
     width: 100%;
     height: 300px;
     object-fit: cover;
@@ -235,6 +235,11 @@ form textarea {
 }
 
 .lightbox-modal img {
+    width: 100%;
+    height: 650px;
+}
+
+.lightbox-modal video {
     width: 100%;
     height: 650px;
 }

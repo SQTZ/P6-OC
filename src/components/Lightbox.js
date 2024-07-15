@@ -67,7 +67,7 @@ const Lightbox = ({ media, onClose, onPrev, onNext }) => {
                     ) : (
 
                         <video controls>
-                            <source src={`../assets/videos/${media.video}`} type="video/mp4" />
+                            <source src={`../assets/images/${media.video}`} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
 
