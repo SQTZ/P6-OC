@@ -10,12 +10,19 @@ function App() {
   
   return (
     <div>
+
       <Router>
+
         <Routes>
+
             <Route path="/" element={<Photographers />} />
+
             <Route path="/photographer/:id" element={<Photographer />} />
+
         </Routes>
+
       </Router>
+      
     </div>
   );
 }

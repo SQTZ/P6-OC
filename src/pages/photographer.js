@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/layout';
-import Lightbox from '../components/Lightbox'; // Assurez-vous de créer ce composant
+import Lightbox from '../components/Lightbox';
 import Formulary from '../components/Formulary';
 
+// Fonctionnalité principale du photographe
 function Photographer() {
     const { id } = useParams();
     const [photographer, setPhotographer] = useState(null);
@@ -14,8 +15,10 @@ function Photographer() {
     const [isFormularyOpen, setIsFormularyOpen] = useState(false);
     const [selectedMediaIndex, setSelectedMediaIndex] = useState(null);
 
+    // Calcul du total des likes pour toutes les médias
     const totalLikes = media.reduce((sum, item) => sum + item.likes, 0);
 
+    // Effet pour charger les données du photographe et ses médias
     useEffect(() => {
         async function fetchPhotographer() {
             try {
@@ -42,11 +45,13 @@ function Photographer() {
     const { name, portrait, city, country, tagline } = photographer;
     const picture = `../assets/photographers/${portrait}`;
 
+    // Gestion du changement de tri
     const handleSortChange = (option) => {
         setSortOption(option);
         setIsDropdownOpen(false);
     };
 
+    // Tri des médias en fonction de l'option sélectionnée
     const sortedMedia = [...media].sort((a, b) => {
         if (sortOption === 'likes') {
             return b.likes - a.likes;
@@ -59,6 +64,7 @@ function Photographer() {
         }
     });
 
+    // Fonction pour incrémenter les likes d'un média
     const incrementLikes = (id) => {
         setMedia((prevMedia) => {
             const newMedia = prevMedia.map((item) => {
@@ -71,11 +77,13 @@ function Photographer() {
         });
     };
 
+    // Options de tri disponibles
     const sortOptions = [
         { value: 'likes', label: 'Popularité' },
         { value: 'title', label: 'Titre' }
     ];
 
+    // Ouvrir ou fermer la lightbox
     const openLightbox = (index) => {
         setSelectedMediaIndex(index);
         setIsLightboxOpen(true);
@@ -86,6 +94,7 @@ function Photographer() {
         setSelectedMediaIndex(null);
     };
 
+    // Ouvrir ou fermer le formulaire
     const openFormulary = () => {
         setIsFormularyOpen(true);
     };
@@ -94,6 +103,7 @@ function Photographer() {
         setIsFormularyOpen(false);
     };
 
+    // Navigation dans la lightbox
     const showNextMedia = () => {
         setSelectedMediaIndex((prevIndex) => (prevIndex + 1) % sortedMedia.length);
     };
@@ -241,8 +251,3 @@ function Photographer() {
 }
 
 export default Photographer;
-
-
-
-
-
