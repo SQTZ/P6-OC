@@ -30,7 +30,7 @@ function Formulary({ onClose, photographer }) {
 
                     <label>Nom</label>
 
-                    <input type="email" />
+                    <input type="text" />
 
                 </div>
 

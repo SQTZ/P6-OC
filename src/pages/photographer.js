@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import Layout from '../components/layout';
 import Lightbox from '../components/Lightbox';
@@ -14,6 +14,7 @@ function Photographer() {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [isFormularyOpen, setIsFormularyOpen] = useState(false);
     const [selectedMediaIndex, setSelectedMediaIndex] = useState(null);
+    const videoRef = useRef(null);
 
     // Calcul du total des likes pour toutes les médias
     const totalLikes = media.reduce((sum, item) => sum + item.likes, 0);
@@ -55,8 +56,6 @@ function Photographer() {
     const sortedMedia = [...media].sort((a, b) => {
         if (sortOption === 'likes') {
             return b.likes - a.likes;
-        } else if (sortOption === 'date') {
-            return new Date(b.date) - new Date(a.date);
         } else if (sortOption === 'title') {
             return a.title.localeCompare(b.title);
         } else {
@@ -92,6 +91,10 @@ function Photographer() {
     const closeLightbox = () => {
         setIsLightboxOpen(false);
         setSelectedMediaIndex(null);
+        if (videoRef.current) {
+            videoRef.current.pause(); // Mettez la vidéo en pause
+            videoRef.current.currentTime = 0; // Réinitialisez la vidéo au début
+        }
     };
 
     // Ouvrir ou fermer le formulaire
@@ -185,7 +188,7 @@ function Photographer() {
 
                             ) : (
 
-                                <video controls onClick={() => openLightbox(index)}>
+                                <video ref={videoRef} controls={isLightboxOpen} onClick={() => openLightbox(index)}>
                                     <source src={`../assets/images/${item.video}`} poster={`../assets/images/${item.video.split('.')[0]}.jpg`} type="video/mp4" />
                                     Your browser does not support the video tag.
                                 </video>
