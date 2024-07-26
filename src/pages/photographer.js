@@ -14,6 +14,8 @@ function Photographer() {
     const [isLightboxOpen, setIsLightboxOpen] = useState(false);
     const [isFormularyOpen, setIsFormularyOpen] = useState(false);
     const [selectedMediaIndex, setSelectedMediaIndex] = useState(null);
+
+    // Réference pour la vidéo
     const videoRef = useRef(null);
 
     // Calcul du total des likes pour toutes les médias
@@ -88,12 +90,13 @@ function Photographer() {
         setIsLightboxOpen(true);
     };
 
+    
     const closeLightbox = () => {
         setIsLightboxOpen(false);
         setSelectedMediaIndex(null);
         if (videoRef.current) {
-            videoRef.current.pause(); // Mettez la vidéo en pause
-            videoRef.current.currentTime = 0; // Réinitialisez la vidéo au début
+            videoRef.current.pause(); // Vidéo en pause
+            videoRef.current.currentTime = 0; // Je renitialise ma vidéo au début
         }
     };
 
