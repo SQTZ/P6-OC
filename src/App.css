@@ -38,6 +38,12 @@ h1 {
     align-items: center;
     flex-direction: column;
 }
+.photograph-header h2 {
+    font-size: 64px;
+    color: #DB8876;
+    font-weight: normal;
+    margin-bottom: 0;
+}
 
 .photographer_section article h2 {
     color: #D3573C;

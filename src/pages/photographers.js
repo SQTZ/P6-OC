@@ -37,7 +37,7 @@ function Photographers() {
     const profileURL = `/photographer/${id}`;
 
     return (
-      <article>
+      <article aria-label='Mimi Keel'>
         
         <a href={profileURL}><img src={picture} alt={name} /></a>
 

@@ -4,7 +4,7 @@ function Layout() {
 
             <header>
 
-                <a href="/"><img src="/logo.png" class="logo" alt="fisheye logo" /></a>
+                <a href="/"><img src="/logo.png" class="logo" alt="Fisheye Home page" /></a>
 
                 <h1>Nos photographes</h1>
 
