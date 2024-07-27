@@ -50,8 +50,8 @@ const Lightbox = ({ media, onClose, onPrev, onNext }) => {
     };
 
     return (
-        <main className="lightbox-modal" aria-label="image closeup view">
-            <div className="lightbox-close" aria-label="Close dialog">
+        <main className="lightbox-modal" aria-label="image closeup view" tabIndex="-1">
+            <div className="lightbox-close" aria-label="Close dialog" role="button" tabIndex="0" onKeyDown={(e) => e.key === 'Enter' && handleClose()}>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     onClick={handleClose}
@@ -72,7 +72,7 @@ const Lightbox = ({ media, onClose, onPrev, onNext }) => {
             </div>
 
             <div className="lightbox-content">
-                <div aria-label="Previous image">
+                <div aria-label="Previous image" role="button" tabIndex="0" onKeyDown={(e) => e.key === 'Enter' && handlePrev()}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         onClick={handlePrev}
@@ -117,7 +117,7 @@ const Lightbox = ({ media, onClose, onPrev, onNext }) => {
                     </div>
                 </div>
 
-                <div aria-label="Next image">
+                <div aria-label="Next image" role="button" tabIndex="0" onKeyDown={(e) => e.key === 'Enter' && handleNext()}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         onClick={handleNext}

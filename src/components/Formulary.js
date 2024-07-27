@@ -6,9 +6,13 @@ function Formulary({ onClose, photographer }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const message = 'Votre message a été envoyé avec succès !';
-        console.log(message);
-        setSuccessMessage(message);
+        const firstName = e.target['first-name'].value;
+        const lastName = e.target['last-name'].value;
+        const email = e.target['email'].value;
+        const message = e.target['message'].value;
+        const successMessage = `\nPrénom: ${firstName}\nNom: ${lastName}\nEmail: ${email}\nMessage: ${message}`;
+        console.log(successMessage);
+        setSuccessMessage(successMessage);
     };
 
     useEffect(() => {
